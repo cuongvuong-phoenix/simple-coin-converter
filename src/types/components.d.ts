@@ -6,9 +6,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     CConverter: typeof import('./../components/CConverter.vue')['default']
     CConverterInput: typeof import('./../components/CConverterInput.vue')['default']
+    CFooter: typeof import('./../components/CFooter.vue')['default']
+    CHeader: typeof import('./../components/CHeader.vue')['default']
+    IArcticonsPriceConverter: typeof import('./../components/icons/IArcticonsPriceConverter.vue')['default']
     IMdiArrowDown: typeof import('~icons/mdi/arrow-down')['default']
     IMdiAutorenew: typeof import('~icons/mdi/autorenew')['default']
     IMdiChevronDown: typeof import('~icons/mdi/chevron-down')['default']
+    IMdiGithub: typeof import('~icons/mdi/github')['default']
   }
 }
 

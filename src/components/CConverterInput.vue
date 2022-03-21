@@ -146,7 +146,6 @@
               no-repeat right $padding-x center / 1rem,
             #d1d5db;
           min-width: 3ch;
-          max-width: 12ch;
           padding: 0.25rem $padding-x;
           padding-right: $padding-x * 2 + 1rem;
           border-radius: 0.25rem;

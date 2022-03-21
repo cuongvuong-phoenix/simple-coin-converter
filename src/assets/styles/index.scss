@@ -1,4 +1,5 @@
 @import './animations.scss';
+@import './scrollbar.scss';
 
 html {
   font-family: Roboto, sans-serif;
@@ -27,6 +28,11 @@ select {
   cursor: pointer;
 }
 
+a {
+  color: initial;
+}
+
+a,
 button,
 input,
 select {
