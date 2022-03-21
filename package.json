@@ -1,10 +1,10 @@
 {
-  "name": "simple-crypto-converter",
+  "name": "simple-coin-converter",
   "private": true,
   "version": "0.0.0",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

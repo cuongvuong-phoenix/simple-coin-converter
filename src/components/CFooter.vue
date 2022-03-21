@@ -6,7 +6,7 @@
 
     <div class="footer__line-2">
       <a
-        href="https://github.com/cuongvuong-phoenix/simple-crypto-converter"
+        href="https://github.com/cuongvuong-phoenix/simple-coin-converter"
         target="_blank"
         rel="noopener noreferrer"
         class="footer__link"

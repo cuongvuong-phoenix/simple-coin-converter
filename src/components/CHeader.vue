@@ -4,7 +4,7 @@
       <IArcticonsPriceConverter class="header__icon" />
     </div>
 
-    <h1 class="header__title">SIMPLE CRYPTO CONVERTER</h1>
+    <h1 class="header__title">SIMPLE COIN CONVERTER</h1>
   </header>
 </template>
 
