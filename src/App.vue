@@ -1,6 +1,6 @@
 <template>
   <main class="main">
-    <SConverter />
+    <CConverter />
   </main>
 </template>
 

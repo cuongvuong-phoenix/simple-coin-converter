@@ -4,6 +4,9 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CConverter: typeof import('./../components/CConverter.vue')['default']
+    CConverterInput: typeof import('./../components/CConverterInput.vue')['default']
+    IMdiChevronDown: typeof import('~icons/mdi/chevron-down')['default']
     SConverter: typeof import('./../components/SConverter.vue')['default']
     SConverterInput: typeof import('./../components/SConverterInput.vue')['default']
   }

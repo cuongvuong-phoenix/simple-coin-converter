@@ -4,8 +4,16 @@ html {
   color: #1f2937;
 }
 
+/* ----------------------------------------------------------------
+Reset
+---------------------------------------------------------------- */
+* {
+  box-sizing: border-box;
+}
+
 input {
   background-color: transparent;
+  padding: 0;
 
   &:focus,
   &:focus-visible {
@@ -13,6 +21,20 @@ input {
   }
 }
 
+select {
+  appearance: none;
+  background-color: transparent;
+  padding: 0;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+  }
+}
+
+/* ----------------------------------------------------------------
+Custom
+---------------------------------------------------------------- */
 .container {
   max-width: 100%;
   padding-left: 2rem;
