@@ -7,7 +7,7 @@ computed, import { ref } from 'vue';
       :input="fromAmount"
       :options="tokens"
       :disabled-option-address="toAddress"
-      @update:input="(isFromInputting = true), updateAmounts($event)"
+      @update:input="(isFromAmountInputting = true), updateAmountsWithBase($event)"
     />
 
     <button type="button" class="button button--circular converter__swap-button" @click="swap()">
@@ -19,7 +19,7 @@ computed, import { ref } from 'vue';
       :input="toAmount"
       :options="tokens"
       :disabled-option-address="fromAddress"
-      @update:input="(isFromInputting = false), updateAmounts($event)"
+      @update:input="(isFromAmountInputting = false), updateAmountsWithBase($event)"
     />
     <!-- END "Inputs" -->
 
@@ -126,9 +126,9 @@ computed, import { ref } from 'vue';
   /* ----------------------------------------------------------------
   Handlers
   ---------------------------------------------------------------- */
-  const isFromInputting = ref(true);
+  const isFromAmountInputting = ref(true);
 
-  function updateAmounts(baseAmount?: string) {
+  function updateAmountsWithBase(baseAmount?: string) {
     if (!baseAmount) {
       fromAmount.value = '';
       toAmount.value = '';
@@ -136,7 +136,7 @@ computed, import { ref } from 'vue';
       return;
     }
 
-    if (isFromInputting.value) {
+    if (isFromAmountInputting.value) {
       fromAmount.value = baseAmount;
       toAmount.value = toDecimal(parseFloat(baseAmount) / price.value).toString();
     } else {
@@ -151,19 +151,19 @@ computed, import { ref } from 'vue';
     toAddress.value = tempAddress;
 
     // Move inputting amount to the other one and re-calculate.
-    isFromInputting.value = !isFromInputting.value;
-    if (isFromInputting.value) {
-      updateAmounts(toAmount.value);
+    isFromAmountInputting.value = !isFromAmountInputting.value;
+    if (isFromAmountInputting.value) {
+      updateAmountsWithBase(toAmount.value);
     } else {
-      updateAmounts(fromAmount.value);
+      updateAmountsWithBase(fromAmount.value);
     }
   }
 
   async function refresh() {
     await getTokens();
 
-    isFromInputting.value = true;
-    updateAmounts(fromAmount.value);
+    isFromAmountInputting.value = true;
+    updateAmountsWithBase(fromAmount.value);
   }
 </script>
 
