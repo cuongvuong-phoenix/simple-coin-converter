@@ -1,4 +1,3 @@
-computed, import { ref } from 'vue';
 <template>
   <div class="converter">
     <!-- "Inputs" -->
@@ -10,7 +9,12 @@ computed, import { ref } from 'vue';
       @update:input="(isFromAmountInputting = true), updateAmountsWithBase($event)"
     />
 
-    <button type="button" class="button button--circular converter__swap-button" @click="swap()">
+    <button
+      type="button"
+      title="Swap 2 input tokens"
+      class="button button--circular converter__swap-button"
+      @click="swap()"
+    >
       <i-mdi-arrow-down />
     </button>
 
@@ -36,6 +40,7 @@ computed, import { ref } from 'vue';
 
         <button
           type="button"
+          title="Refresh tokens"
           class="button button--circular converter__refresh-price-button"
           :class="{ loading: getTokensLoading }"
           @click="refresh()"
