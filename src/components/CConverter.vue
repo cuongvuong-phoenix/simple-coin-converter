@@ -34,7 +34,12 @@ computed, import { ref } from 'vue';
           >&nbsp;<span>per</span>&nbsp;<span class="converter__price-token">{{ toToken?.symbol }}</span>
         </p>
 
-        <button type="button" class="button button--circular converter__refresh-price-button" @click="getTokens()">
+        <button
+          type="button"
+          class="button button--circular converter__refresh-price-button"
+          :class="{ loading: getTokensLoading }"
+          @click="getTokens()"
+        >
           <i-mdi-autorenew />
         </button>
       </div>
@@ -70,9 +75,12 @@ computed, import { ref } from 'vue';
   Tokens
   ---------------------------------------------------------------- */
   const tokens = ref<ConverterSelectOption[]>([]);
+  const getTokensLoading = ref(false);
 
   async function getTokens() {
     try {
+      getTokensLoading.value = true;
+
       const res = (await axios.get<PancakeSwapTokenResponse>('https://api.pancakeswap.info/api/v2/tokens')).data;
 
       tokens.value = Object.entries(res.data)
@@ -84,6 +92,8 @@ computed, import { ref } from 'vue';
         .sort((a, b) => (a.symbol < b.symbol ? -1 : 1));
     } catch (error) {
       console.error(error);
+    } finally {
+      getTokensLoading.value = false;
     }
   }
 
@@ -196,6 +206,10 @@ computed, import { ref } from 'vue';
 
               &:hover {
                 background-color: rgb(59 130 246);
+              }
+
+              &.loading {
+                animation: spin 1s linear infinite;
               }
             }
           }
