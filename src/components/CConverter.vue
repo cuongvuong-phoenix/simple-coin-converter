@@ -38,7 +38,7 @@ computed, import { ref } from 'vue';
           type="button"
           class="button button--circular converter__refresh-price-button"
           :class="{ loading: getTokensLoading }"
-          @click="getTokens()"
+          @click="refresh()"
         >
           <i-mdi-autorenew />
         </button>
@@ -128,8 +128,8 @@ computed, import { ref } from 'vue';
   ---------------------------------------------------------------- */
   const isFromInputting = ref(true);
 
-  function updateAmounts(value?: string) {
-    if (!value) {
+  function updateAmounts(baseAmount?: string) {
+    if (!baseAmount) {
       fromAmount.value = '';
       toAmount.value = '';
 
@@ -137,11 +137,11 @@ computed, import { ref } from 'vue';
     }
 
     if (isFromInputting.value) {
-      fromAmount.value = value;
-      toAmount.value = toDecimal(parseFloat(value) / price.value).toString();
+      fromAmount.value = baseAmount;
+      toAmount.value = toDecimal(parseFloat(baseAmount) / price.value).toString();
     } else {
-      toAmount.value = value;
-      fromAmount.value = toDecimal(parseFloat(value) * price.value).toString();
+      toAmount.value = baseAmount;
+      fromAmount.value = toDecimal(parseFloat(baseAmount) * price.value).toString();
     }
   }
 
@@ -157,6 +157,13 @@ computed, import { ref } from 'vue';
     } else {
       updateAmounts(fromAmount.value);
     }
+  }
+
+  async function refresh() {
+    await getTokens();
+
+    isFromInputting.value = true;
+    updateAmounts(fromAmount.value);
   }
 </script>
 
@@ -197,6 +204,7 @@ computed, import { ref } from 'vue';
           .converter {
             &__price-token {
               font-style: italic;
+              font-weight: 700;
             }
 
             &__refresh-price-button {
