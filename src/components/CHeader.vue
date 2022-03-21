@@ -17,8 +17,8 @@
 
       .header {
         &__icon {
-          width: 4rem;
-          height: 4rem;
+          width: 6rem;
+          height: 6rem;
           color: rgb(37 99 235);
         }
       }
