@@ -3,10 +3,11 @@ computed, import { ref } from 'vue';
   <div class="converter">
     <!-- "Inputs" -->
     <CConverterInput
-      v-model:input="fromInput.input"
-      v-model:select="fromInput.select"
-      :options="options"
-      :disabled-option-address="toInput.select"
+      v-model:select="fromAddress"
+      :input="fromAmount"
+      :options="tokens"
+      :disabled-option-address="toAddress"
+      @update:input="(isFromInputting = true), updateAmounts($event)"
     />
 
     <button type="button" class="button button--circular converter__swap-button" @click="swap()">
@@ -14,10 +15,11 @@ computed, import { ref } from 'vue';
     </button>
 
     <CConverterInput
-      v-model:input="toInput.input"
-      v-model:select="toInput.select"
-      :options="options"
-      :disabled-option-address="fromInput.select"
+      v-model:select="toAddress"
+      :input="toAmount"
+      :options="tokens"
+      :disabled-option-address="fromAddress"
+      @update:input="(isFromInputting = false), updateAmounts($event)"
     />
     <!-- END "Inputs" -->
 
@@ -28,10 +30,8 @@ computed, import { ref } from 'vue';
       <div class="converter__price-right">
         <p>
           <span>{{ `${price}` }}</span
-          >&nbsp;<span class="converter__price-token">{{ getOptionById(fromInput.select, options)?.symbol }}</span
-          >&nbsp;<span>per</span>&nbsp;<span class="converter__price-token">{{
-            getOptionById(toInput.select, options)?.symbol
-          }}</span>
+          >&nbsp;<span class="converter__price-token">{{ fromToken?.symbol }}</span
+          >&nbsp;<span>per</span>&nbsp;<span class="converter__price-token">{{ toToken?.symbol }}</span>
         </p>
 
         <button type="button" class="button button--circular converter__refresh-price-button">
@@ -44,14 +44,15 @@ computed, import { ref } from 'vue';
 </template>
 
 <script setup lang="ts">
-  import { computed, reactive, ref } from 'vue';
+  import { computed, ref } from 'vue';
+  import { toFixedNumber } from '~/helpers';
   import { type ConverterSelectOption } from '~/components/CConverterInput.vue';
 
   /* ----------------------------------------------------------------
   Helpers
   ---------------------------------------------------------------- */
-  function getOptionById(id: string, options: ConverterSelectOption[]) {
-    const index = options.findIndex((opt) => opt.address === id);
+  function getOptionByAddress(address: string, options: ConverterSelectOption[]) {
+    const index = options.findIndex((opt) => opt.address === address);
 
     if (index !== -1) {
       return options[index];
@@ -59,67 +60,69 @@ computed, import { ref } from 'vue';
   }
 
   /* ----------------------------------------------------------------
-  Inputs
+  Tokens
   ---------------------------------------------------------------- */
-  const options = ref<ConverterSelectOption[]>([]);
-
-  options.value.push(
-    ...[
-      {
-        address: '1',
-        symbol: 'BUSD',
-        price: 0.999959589937203804457393434771,
-      },
-      {
-        address: '2',
-        symbol: 'BNB',
-        price: 394.5470666323749350017044505664,
-      },
-      {
-        address: '3',
-        symbol: 'Cake',
-        price: 6.57143634311133030104076545695,
-      },
-    ]
-  );
-
-  const fromInput = reactive({
-    input: undefined,
-    select: options.value[0].address,
-  });
-
-  const toInput = reactive({
-    input: undefined,
-    select: options.value[1].address,
-  });
+  const tokens = ref<ConverterSelectOption[]>([]);
 
   /* ----------------------------------------------------------------
-  Swap
+  From & To
   ---------------------------------------------------------------- */
-  function swap() {
-    const tempInput = fromInput.input;
-    const tempSelect = fromInput.select;
+  const fromAddress = ref<string>();
+  const fromToken = computed(() =>
+    fromAddress.value ? getOptionByAddress(fromAddress.value, tokens.value) : undefined
+  );
+  const toAddress = ref<string>();
+  const toToken = computed(() => (toAddress.value ? getOptionByAddress(toAddress.value, tokens.value) : undefined));
 
-    fromInput.input = toInput.input;
-    fromInput.select = toInput.select;
-
-    toInput.input = tempInput;
-    toInput.select = tempSelect;
-  }
+  const fromAmount = ref('');
+  const toAmount = ref('');
 
   /* ----------------------------------------------------------------
   Price
   ---------------------------------------------------------------- */
   const price = computed(() => {
-    const fromOption = getOptionById(fromInput.select, options.value);
-    const toOption = getOptionById(toInput.select, options.value);
-
-    if (fromOption && toOption) {
-      return parseFloat((toOption.price / fromOption.price).toFixed(4));
+    if (fromToken.value && toToken.value) {
+      return toFixedNumber(toToken.value.price / fromToken.value.price);
     }
 
     return 0;
   });
+
+  /* ----------------------------------------------------------------
+  Handlers
+  ---------------------------------------------------------------- */
+  const isFromInputting = ref(true);
+
+  function updateAmounts(value?: string) {
+    if (!value) {
+      fromAmount.value = '';
+      toAmount.value = '';
+
+      return;
+    }
+
+    if (isFromInputting.value) {
+      fromAmount.value = value;
+      toAmount.value = toFixedNumber(parseFloat(value) / price.value).toString();
+    } else {
+      toAmount.value = value;
+      fromAmount.value = toFixedNumber(parseFloat(value) * price.value).toString();
+    }
+  }
+
+  function swap() {
+    const tempAddress = fromAddress.value;
+    fromAddress.value = toAddress.value;
+    toAddress.value = tempAddress;
+
+    // Move inputting amount to the other one and re-calculate.
+    isFromInputting.value = !isFromInputting.value;
+    if (isFromInputting.value) {
+      updateAmounts(toAmount.value);
+    } else {
+      updateAmounts(fromAmount.value);
+    }
+  }
 </script>
 
 <style lang="scss">
