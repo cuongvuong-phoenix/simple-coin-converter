@@ -11,25 +11,31 @@ Reset
   box-sizing: border-box;
 }
 
-input {
+button,
+input,
+select {
   background-color: transparent;
   padding: 0;
+  border: none;
+}
 
+button,
+select {
+  appearance: none;
+  cursor: pointer;
+}
+
+button,
+input,
+select {
   &:focus,
   &:focus-visible {
     outline: none;
   }
 }
 
-select {
-  appearance: none;
-  background-color: transparent;
-  padding: 0;
-
-  &:focus,
-  &:focus-visible {
-    outline: none;
-  }
+p {
+  margin: 0;
 }
 
 /* ----------------------------------------------------------------
@@ -39,4 +45,23 @@ Custom
   max-width: 100%;
   padding-left: 2rem;
   padding-right: 2rem;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button--circular {
+  padding: 0.25rem;
+  border-radius: 50%;
+
+  &:hover {
+    color: rgb(37 99 235);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
+  }
 }

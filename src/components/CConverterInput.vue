@@ -22,7 +22,14 @@
         :value="select"
         @change="event => emit('update:select', (event.target as HTMLSelectElement).value)"
       >
-        <option v-for="option in options" :key="option.id" :value="option.id">{{ option.text }}</option>
+        <option
+          v-for="option in options"
+          :key="option.address"
+          :value="option.address"
+          :disabled="option.address === disabledOptionAddress"
+        >
+          {{ option.symbol }}
+        </option>
       </select>
     </div>
   </div>
@@ -30,8 +37,9 @@
 
 <script lang="ts">
   export interface ConverterSelectOption {
-    id: string;
-    text: string;
+    address: string;
+    symbol: string;
+    price: number;
   }
 </script>
 
@@ -43,6 +51,7 @@
     input?: string;
     select?: string;
     options?: ConverterSelectOption[];
+    disabledOptionAddress?: string;
   }>();
 
   const emit = defineEmits<{
@@ -121,7 +130,7 @@
 
     &:focus-within {
       border-color: transparent;
-      box-shadow: 0 0 0 2px rgb(124 58 237 / 0.5);
+      box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
     }
 
     &__input {
@@ -150,7 +159,7 @@
 
           &:focus-visible {
             border-color: transparent;
-            box-shadow: 0 0 0 2px rgb(13 148 136 / 0.5);
+            box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
           }
         }
       }

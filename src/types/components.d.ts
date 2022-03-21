@@ -6,9 +6,9 @@ declare module 'vue' {
   export interface GlobalComponents {
     CConverter: typeof import('./../components/CConverter.vue')['default']
     CConverterInput: typeof import('./../components/CConverterInput.vue')['default']
+    IMdiArrowDown: typeof import('~icons/mdi/arrow-down')['default']
+    IMdiAutorenew: typeof import('~icons/mdi/autorenew')['default']
     IMdiChevronDown: typeof import('~icons/mdi/chevron-down')['default']
-    SConverter: typeof import('./../components/SConverter.vue')['default']
-    SConverterInput: typeof import('./../components/SConverterInput.vue')['default']
   }
 }
 

@@ -16,12 +16,12 @@ export default defineConfig({
     vue({
       reactivityTransform: true,
     }),
-    icons({
-      scale: 1.5,
-    }),
     components({
       resolvers: [iconResolver()],
       dts: 'src/types/components.d.ts',
+    }),
+    icons({
+      scale: 1.5,
     }),
   ],
 });
