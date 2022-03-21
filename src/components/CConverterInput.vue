@@ -1,7 +1,6 @@
 <template>
   <div class="converter-input">
     <input
-      :id="id ? `${id}__input` : undefined"
       :value="input"
       type="text"
       inputmode="decimal"
@@ -17,7 +16,6 @@
 
     <div class="converter-input__select-wrapper">
       <select
-        :id="id ? `${id}__select` : undefined"
         class="converter-input__select"
         :value="select"
         @change="event => emit('update:select', (event.target as HTMLSelectElement).value)"
@@ -45,9 +43,6 @@
 
 <script setup lang="ts">
   const { options = [] } = defineProps<{
-    // Attributes.
-    id?: string;
-
     input?: string;
     select?: string;
     options?: ConverterSelectOption[];

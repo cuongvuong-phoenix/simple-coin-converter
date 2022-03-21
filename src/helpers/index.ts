@@ -1,1 +1,2 @@
-export * from './toFixedNumber';
+export * from './toDecimal';
+export * from './removeScientific';

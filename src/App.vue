@@ -1,6 +1,12 @@
 <template>
   <main class="main">
-    <CConverter />
+    <Suspense>
+      <CConverter />
+
+      <template #fallback>
+        <div>Loading...</div>
+      </template>
+    </Suspense>
   </main>
 </template>
 
