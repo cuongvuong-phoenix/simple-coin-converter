@@ -4,7 +4,8 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./../components/HelloWorld.vue')['default']
+    SConverter: typeof import('./../components/SConverter.vue')['default']
+    SConverterInput: typeof import('./../components/SConverterInput.vue')['default']
   }
 }
 

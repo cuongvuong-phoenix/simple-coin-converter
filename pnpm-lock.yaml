@@ -6,7 +6,9 @@ specifiers:
   '@vitejs/plugin-vue': ^2.2.4
   eslint: ^8.11.0
   eslint-config-prettier: ^8.5.0
+  normalize.css: ^8.0.1
   prettier: ^2.6.0
+  sass: ^1.49.9
   typescript: ^4.6.2
   unplugin-icons: ^0.14.0
   unplugin-vue-components: ^0.18.3
@@ -15,6 +17,7 @@ specifiers:
   vue-tsc: ^0.33.5
 
 dependencies:
+  normalize.css: 8.0.1
   vue: 3.2.31
 
 devDependencies:
@@ -24,10 +27,11 @@ devDependencies:
   eslint: 8.11.0
   eslint-config-prettier: 8.5.0_eslint@8.11.0
   prettier: 2.6.0
+  sass: 1.49.9
   typescript: 4.6.2
   unplugin-icons: 0.14.0_vite@2.8.6
   unplugin-vue-components: 0.18.3_vite@2.8.6+vue@3.2.31
-  vite: 2.8.6
+  vite: 2.8.6_sass@1.49.9
   vue-tsc: 0.33.5_typescript@4.6.2
 
 packages:
@@ -406,7 +410,7 @@ packages:
       vite: ^2.5.10
       vue: ^3.2.25
     dependencies:
-      vite: 2.8.6
+      vite: 2.8.6_sass@1.49.9
       vue: 3.2.31
     dev: true
 
@@ -1155,7 +1159,7 @@ packages:
     peerDependencies:
       eslint: ^8.0.1
       eslint-plugin-import: ^2.25.2
-      eslint-plugin-n: ^14.0.0
+      eslint-plugin-n: ^14.0.0 || 15
       eslint-plugin-promise: ^6.0.0
     dependencies:
       eslint: 8.11.0
@@ -1722,6 +1726,10 @@ packages:
     engines: {node: '>= 4'}
     dev: true
 
+  /immutable/4.0.0:
+    resolution: {integrity: sha512-zIE9hX70qew5qTUjSS7wi1iwj/l7+m54KWU247nhM3v806UdGj1yDndXj+IOYxxtW9zyLI+xqFNZjTuDaLUqFw==}
+    dev: true
+
   /import-fresh/3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
     engines: {node: '>=6'}
@@ -2135,6 +2143,10 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /normalize.css/8.0.1:
+    resolution: {integrity: sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==}
+    dev: false
+
   /npm-run-path/4.0.1:
     resolution: {integrity: sha512-S48WzZW777zhNIrn7gxOlISNAqi9ZC/uQFnRdbeIHhZhCA6UqpkOT8T1G7BvfdgP4Er8gF4sUbaS0i7QvIfCWw==}
     engines: {node: '>=8'}
@@ -2503,6 +2515,16 @@ packages:
       regexp-tree: 0.1.24
     dev: true
 
+  /sass/1.49.9:
+    resolution: {integrity: sha512-YlYWkkHP9fbwaFRZQRXgDi3mXZShslVmmo+FVK3kHLUELHHEYrCmL1x6IUjC7wLS6VuJSAFXRQS/DxdsC4xL1A==}
+    engines: {node: '>=12.0.0'}
+    hasBin: true
+    dependencies:
+      chokidar: 3.5.3
+      immutable: 4.0.0
+      source-map-js: 1.0.2
+    dev: true
+
   /semver/5.7.1:
     resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
     hasBin: true
@@ -2821,7 +2843,7 @@ packages:
         optional: true
     dependencies:
       chokidar: 3.5.3
-      vite: 2.8.6
+      vite: 2.8.6_sass@1.49.9
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -2843,7 +2865,7 @@ packages:
         optional: true
     dependencies:
       chokidar: 3.5.3
-      vite: 2.8.6
+      vite: 2.8.6_sass@1.49.9
       webpack-sources: 3.2.3
       webpack-virtual-modules: 0.4.3
     dev: true
@@ -2870,7 +2892,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite/2.8.6:
+  /vite/2.8.6_sass@1.49.9:
     resolution: {integrity: sha512-e4H0QpludOVKkmOsRyqQ7LTcMUDF3mcgyNU4lmi0B5JUbe0ZxeBBl8VoZ8Y6Rfn9eFKYtdXNPcYK97ZwH+K2ug==}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -2890,6 +2912,7 @@ packages:
       postcss: 8.4.12
       resolve: 1.22.0
       rollup: 2.70.1
+      sass: 1.49.9
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
