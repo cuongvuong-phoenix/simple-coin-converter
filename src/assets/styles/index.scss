@@ -2,7 +2,6 @@
 @import './scrollbar.scss';
 
 html {
-  font-family: Roboto, sans-serif;
   background-color: #f3f4f6;
   color: #1f2937;
 }
@@ -10,10 +9,6 @@ html {
 /* ----------------------------------------------------------------
 Reset
 ---------------------------------------------------------------- */
-* {
-  box-sizing: border-box;
-}
-
 button,
 input,
 select {
@@ -24,8 +19,11 @@ select {
 
 button,
 select {
-  appearance: none;
   cursor: pointer;
+}
+
+select {
+  appearance: none;
 }
 
 a {
