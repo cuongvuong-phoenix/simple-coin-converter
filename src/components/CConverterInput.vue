@@ -1,7 +1,7 @@
 <template>
   <div class="converter-input">
     <input
-      :value="input"
+      :value="amount"
       type="text"
       inputmode="decimal"
       :pattern="INPUT_REGEX_STR"
@@ -9,7 +9,7 @@
       autocomplete="false"
       placeholder="0.0"
       class="converter-input__input"
-      @input="event => emit('update:input', (event.target as HTMLInputElement).value)"
+      @input="event => emit('update:amount', (event.target as HTMLInputElement).value)"
       @keydown="onKeyDown($event)"
       @paste="onPaste($event)"
     />
@@ -17,14 +17,14 @@
     <div class="converter-input__select-wrapper">
       <select
         class="converter-input__select"
-        :value="select"
-        @change="event => emit('update:select', (event.target as HTMLSelectElement).value)"
+        :value="selectedTokenAddress"
+        @change="event => emit('update:selectedTokenAddress', (event.target as HTMLSelectElement).value)"
       >
         <option
-          v-for="option in options"
+          v-for="option in tokens"
           :key="option.address"
           :value="option.address"
-          :disabled="option.address === disabledOptionAddress"
+          :disabled="option.address === disabledTokenAddress"
         >
           {{ option.symbol }}
         </option>
@@ -34,7 +34,7 @@
 </template>
 
 <script lang="ts">
-  export interface ConverterSelectOption {
+  export interface ConverterToken {
     address: string;
     symbol: string;
     price: number;
@@ -42,16 +42,16 @@
 </script>
 
 <script setup lang="ts">
-  const { options = [] } = defineProps<{
-    input?: string;
-    select?: string;
-    options?: ConverterSelectOption[];
-    disabledOptionAddress?: string;
+  const { tokens = [] } = defineProps<{
+    amount?: string;
+    selectedTokenAddress?: string;
+    tokens?: ConverterToken[];
+    disabledTokenAddress?: string;
   }>();
 
   const emit = defineEmits<{
-    (e: 'update:input', value?: string): void;
-    (e: 'update:select', value?: string): void;
+    (e: 'update:amount', value?: string): void;
+    (e: 'update:selectedTokenAddress', value?: string): void;
   }>();
 
   /* ----------------------------------------------------------------

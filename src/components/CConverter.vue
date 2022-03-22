@@ -2,12 +2,14 @@
   <div class="converter">
     <!-- "Inputs" -->
     <CConverterInput
-      :input="fromAmount"
-      :select="fromAddress"
-      :options="tokens"
-      :disabled-option-address="toAddress"
-      @update:input="(isFromAmountInputting = true), updateAmountsWithBase($event)"
-      @update:select="(fromAddress = $event), (isFromAmountInputting = true), updateAmountsWithBase(fromAmount)"
+      :amount="fromAmount"
+      :selected-token-address="fromAddress"
+      :tokens="tokens"
+      :disabled-token-address="toAddress"
+      @update:amount="(isFromAmountInputting = true), updateAmountsWithBase($event)"
+      @update:selected-token-address="
+        (fromAddress = $event), (isFromAmountInputting = true), updateAmountsWithBase(fromAmount)
+      "
     />
 
     <button type="button" title="Swap 2 tokens" class="button button--circular converter__swap-button" @click="swap()">
@@ -15,12 +17,14 @@
     </button>
 
     <CConverterInput
-      :input="toAmount"
-      :select="toAddress"
-      :options="tokens"
-      :disabled-option-address="fromAddress"
-      @update:input="(isFromAmountInputting = false), updateAmountsWithBase($event)"
-      @update:select="(toAddress = $event), (isFromAmountInputting = false), updateAmountsWithBase(toAmount)"
+      :amount="toAmount"
+      :selected-token-address="toAddress"
+      :tokens="tokens"
+      :disabled-token-address="fromAddress"
+      @update:amount="(isFromAmountInputting = false), updateAmountsWithBase($event)"
+      @update:selected-token-address="
+        (toAddress = $event), (isFromAmountInputting = false), updateAmountsWithBase(toAmount)
+      "
     />
     <!-- END "Inputs" -->
 
@@ -54,12 +58,12 @@
   import { computed, ref, shallowRef } from 'vue';
   import axios from 'axios';
   import { removeScientific, toDecimal } from '~/helpers';
-  import { type ConverterSelectOption } from '~/components/CConverterInput.vue';
+  import { type ConverterToken } from '~/components/CConverterInput.vue';
 
   /* ----------------------------------------------------------------
   Helpers
   ---------------------------------------------------------------- */
-  function getTokenByAddress(address: string, tokens: ConverterSelectOption[]) {
+  function getTokenByAddress(address: string, tokens: ConverterToken[]) {
     const index = tokens.findIndex((opt) => opt.address === address);
 
     if (index !== -1) {
@@ -67,7 +71,7 @@
     }
   }
 
-  function getRandomToken(tokens: ConverterSelectOption[], excludedAddresses: string[] = []) {
+  function getRandomToken(tokens: ConverterToken[], excludedAddresses: string[] = []) {
     const validTokens = tokens.filter((token) => !excludedAddresses.includes(token.address));
 
     if (validTokens.length > 0) {
@@ -78,7 +82,7 @@
   /* ----------------------------------------------------------------
   Tokens
   ---------------------------------------------------------------- */
-  const tokens = shallowRef<ConverterSelectOption[]>([]);
+  const tokens = shallowRef<ConverterToken[]>([]);
   const getTokensLoading = ref(false);
 
   async function getTokens() {
