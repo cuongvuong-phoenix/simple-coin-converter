@@ -30,7 +30,7 @@
           line-height: 0;
 
           &:hover {
-            color: rgb(37 99 235);
+            color: $color--primary;
           }
 
           .footer {

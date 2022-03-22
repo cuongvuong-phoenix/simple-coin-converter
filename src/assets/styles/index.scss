@@ -2,8 +2,8 @@
 @import './scrollbar.scss';
 
 html {
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: $color--bg;
+  color: $color--fg;
 }
 
 /* ----------------------------------------------------------------
@@ -64,10 +64,10 @@ Custom
   border-radius: 50%;
 
   &:hover {
-    color: rgb(37 99 235);
+    color: $color--primary;
   }
 
   &:focus {
-    box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
+    box-shadow: 0 0 0 2px rgba($color--primary, 0.5);
   }
 }

@@ -175,7 +175,7 @@
     flex-direction: column;
     align-items: center;
     padding: 2rem;
-    border: 1px solid #d1d5db;
+    border: 1px solid $color--bg--darker;
     border-radius: 0.25rem;
     box-shadow: 0px 4px 6px 1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
 
@@ -197,7 +197,7 @@
       .converter {
         &__price-left {
           font-weight: 700;
-          color: rgb(37 99 235);
+          color: $color--primary;
         }
 
         &__price-right {
@@ -216,11 +216,11 @@
 
             &__refresh-price-button {
               margin-left: 0.5rem;
-              background-color: rgb(37 99 235);
-              color: rgb(243 244 246);
+              background-color: $color--primary;
+              color: $color--bg;
 
               &:hover {
-                background-color: rgb(59 130 246);
+                background-color: $color--primary--lighter;
               }
 
               &.loading {

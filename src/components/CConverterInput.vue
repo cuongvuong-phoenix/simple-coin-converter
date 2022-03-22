@@ -121,11 +121,11 @@
     max-width: 20rem;
     padding: 0.5rem;
     border-radius: 0.25rem;
-    border: 1px solid #6b7280;
+    border: 1px solid $color--bg--darkest;
 
     &:focus-within {
       border-color: transparent;
-      box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
+      box-shadow: 0 0 0 2px rgba($color--primary, 0.5);
     }
 
     &__input {
@@ -139,12 +139,12 @@
       margin-left: 1rem;
 
       .converter-input {
-        $padding-x: 0.5rem;
-
         &__select {
+          $padding-x: 0.5rem;
+
           background: url('data:image/svg+xml,%3Csvg xmlns="http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"%3E%3Cpath fill="currentColor" d="M7.41 8.58L12 13.17l4.59-4.59L18 10l-6 6l-6-6l1.41-1.42Z"%2F%3E%3C%2Fsvg%3E')
               no-repeat right $padding-x center / 1rem,
-            #d1d5db;
+            $color--bg--darker;
           min-width: 3ch;
           padding: 0.25rem $padding-x;
           padding-right: $padding-x * 2 + 1rem;
@@ -153,7 +153,7 @@
 
           &:focus-visible {
             border-color: transparent;
-            box-shadow: 0 0 0 2px rgb(37 99 235 / 0.5);
+            box-shadow: 0 0 0 2px rgba($color--primary, 0.5);
           }
         }
       }

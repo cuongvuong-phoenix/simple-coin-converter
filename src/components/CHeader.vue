@@ -19,18 +19,18 @@
         &__icon {
           width: 6rem;
           height: 6rem;
-          color: rgb(37 99 235);
+          color: $color--primary;
         }
       }
     }
 
     &__title {
       margin-top: 1rem;
-      text-align: center;
-      font-weight: 700;
       font-size: 1.875rem;
       line-height: 2.25rem;
-      color: rgb(37 99 235);
+      font-weight: 700;
+      color: $color--primary;
+      text-align: center;
     }
   }
 </style>
