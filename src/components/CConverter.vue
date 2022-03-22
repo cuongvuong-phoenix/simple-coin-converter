@@ -2,11 +2,12 @@
   <div class="converter">
     <!-- "Inputs" -->
     <CConverterInput
-      v-model:select="fromAddress"
       :input="fromAmount"
+      :select="fromAddress"
       :options="tokens"
       :disabled-option-address="toAddress"
       @update:input="(isFromAmountInputting = true), updateAmountsWithBase($event)"
+      @update:select="(fromAddress = $event), (isFromAmountInputting = true), updateAmountsWithBase(fromAmount)"
     />
 
     <button
@@ -19,11 +20,12 @@
     </button>
 
     <CConverterInput
-      v-model:select="toAddress"
       :input="toAmount"
+      :select="toAddress"
       :options="tokens"
       :disabled-option-address="fromAddress"
       @update:input="(isFromAmountInputting = false), updateAmountsWithBase($event)"
+      @update:select="(toAddress = $event), (isFromAmountInputting = false), updateAmountsWithBase(toAmount)"
     />
     <!-- END "Inputs" -->
 
