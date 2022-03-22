@@ -51,7 +51,7 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref } from 'vue';
+  import { computed, ref, shallowRef } from 'vue';
   import axios from 'axios';
   import { removeScientific, toDecimal } from '~/helpers';
   import { type ConverterSelectOption } from '~/components/CConverterInput.vue';
@@ -59,24 +59,26 @@
   /* ----------------------------------------------------------------
   Helpers
   ---------------------------------------------------------------- */
-  function getTokenByAddress(address: string, options: ConverterSelectOption[]) {
-    const index = options.findIndex((opt) => opt.address === address);
+  function getTokenByAddress(address: string, tokens: ConverterSelectOption[]) {
+    const index = tokens.findIndex((opt) => opt.address === address);
 
     if (index !== -1) {
-      return options[index];
+      return tokens[index];
     }
   }
 
-  function getRandomToken(tokens: ConverterSelectOption[]) {
-    if (tokens.length > 0) {
-      return tokens[Math.floor(Math.random() * tokens.length)];
+  function getRandomToken(tokens: ConverterSelectOption[], excludedAddresses: string[] = []) {
+    const validTokens = tokens.filter((token) => !excludedAddresses.includes(token.address));
+
+    if (validTokens.length > 0) {
+      return validTokens[Math.floor(Math.random() * validTokens.length)];
     }
   }
 
   /* ----------------------------------------------------------------
   Tokens
   ---------------------------------------------------------------- */
-  const tokens = ref<ConverterSelectOption[]>([]);
+  const tokens = shallowRef<ConverterSelectOption[]>([]);
   const getTokensLoading = ref(false);
 
   async function getTokens() {
@@ -108,7 +110,9 @@
   const fromToken = computed(() =>
     fromAddress.value ? getTokenByAddress(fromAddress.value, tokens.value) : undefined
   );
-  const toAddress = ref<string | undefined>(getRandomToken(tokens.value)?.address);
+  const toAddress = ref<string | undefined>(
+    getRandomToken(tokens.value, fromAddress.value ? [fromAddress.value] : [])?.address
+  );
   const toToken = computed(() => (toAddress.value ? getTokenByAddress(toAddress.value, tokens.value) : undefined));
 
   const fromAmount = ref('');
