@@ -10,12 +10,7 @@
       @update:select="(fromAddress = $event), (isFromAmountInputting = true), updateAmountsWithBase(fromAmount)"
     />
 
-    <button
-      type="button"
-      title="Swap 2 input tokens"
-      class="button button--circular converter__swap-button"
-      @click="swap()"
-    >
+    <button type="button" title="Swap 2 tokens" class="button button--circular converter__swap-button" @click="swap()">
       <i-mdi-arrow-down />
     </button>
 
@@ -186,6 +181,11 @@
 
     &__swap-button {
       margin: 0.5rem 0;
+
+      svg {
+        width: 1.5em;
+        height: 1.5em;
+      }
     }
 
     &__price-wrapper {
