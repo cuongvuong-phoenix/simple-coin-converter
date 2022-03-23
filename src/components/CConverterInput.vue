@@ -6,7 +6,7 @@
       inputmode="decimal"
       :pattern="INPUT_REGEX_STR"
       spellcheck="false"
-      autocomplete="false"
+      autocomplete="off"
       placeholder="0.0"
       class="converter-input__input"
       @input="event => emit('update:amount', (event.target as HTMLInputElement).value)"
@@ -107,8 +107,12 @@
   function onPaste(event: ClipboardEvent) {
     const data = event.clipboardData?.getData('text');
 
-    if (data !== undefined && !INPUT_REGEX.test(data)) {
-      event.preventDefault();
+    if (data !== undefined) {
+      const maybeValue = (event.target as HTMLInputElement).value + data;
+
+      if (!INPUT_REGEX.test(maybeValue)) {
+        event.preventDefault();
+      }
     }
   }
 </script>
