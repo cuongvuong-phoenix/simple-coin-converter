@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
-import 'modern-normalize';
 import App from './App.vue';
-import '~/assets/styles/index.scss';
+import '~/assets/styles/index.css';
 
 createApp(App).mount('#app');

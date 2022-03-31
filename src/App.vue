@@ -1,7 +1,7 @@
 <template>
   <CHeader />
 
-  <main class="main">
+  <main class="flex items-center justify-center mt-8">
     <Suspense>
       <CConverter />
 
@@ -11,24 +11,5 @@
     </Suspense>
   </main>
 
-  <CFooter />
+  <CFooter class="mt-8" />
 </template>
-
-<style lang="scss">
-  #app {
-    min-height: 100vh;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-  }
-
-  .main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 2rem;
-  }
-
-  .footer {
-    margin-top: 2rem;
-  }
-</style>

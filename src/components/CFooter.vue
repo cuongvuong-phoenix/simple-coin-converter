@@ -1,46 +1,18 @@
 <template>
-  <footer class="footer">
+  <footer class="text-center">
     <p>
       Built using <em><strong>Vue 3</strong></em>
     </p>
 
-    <div class="footer__line-2">
+    <div class="mt-2">
       <a
         href="https://github.com/cuongvuong-phoenix/simple-coin-converter"
         target="_blank"
         rel="noopener noreferrer"
-        class="footer__link"
+        class="inline-block rounded-full"
       >
-        <i-mdi-github class="footer__icon" />
+        <i-mdi-github class="w-8 h-8" />
       </a>
     </div>
   </footer>
 </template>
-
-<style lang="scss">
-  .footer {
-    text-align: center;
-
-    &__line-2 {
-      margin-top: 0.5rem;
-
-      .footer {
-        &__link {
-          display: inline-block;
-          line-height: 0;
-
-          &:hover {
-            color: $color--primary;
-          }
-
-          .footer {
-            &__icon {
-              width: 2rem;
-              height: 2rem;
-            }
-          }
-        }
-      }
-    }
-  }
-</style>

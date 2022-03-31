@@ -1,0 +1,52 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import './scrollbar.css';
+
+/* ----------------------------------------------------------------
+Base
+---------------------------------------------------------------- */
+html {
+  @apply bg-bg-default text-fg-default;
+}
+
+/* ----------------------------------------------------------------
+Reset
+---------------------------------------------------------------- */
+input,
+button,
+select {
+  @apply bg-transparent p-0;
+}
+
+select {
+  @apply cursor-pointer appearance-none;
+}
+
+a,
+input,
+button,
+select {
+  &:focus,
+  &:focus-visible {
+    @apply outline-none;
+  }
+}
+
+a,
+button,
+select {
+  &:focus,
+  &:focus-visible {
+    @apply ring-2 ring-primary-default/50;
+  }
+}
+
+a {
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    @apply text-primary-default;
+  }
+}

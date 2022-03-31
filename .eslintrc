@@ -1,3 +1,6 @@
 {
-  "extends": ["@antfu/eslint-config", "prettier"]
+  "extends": ["@antfu/eslint-config", "prettier"],
+  "rules": {
+    "vue/component-tags-order": "off"
+  }
 }

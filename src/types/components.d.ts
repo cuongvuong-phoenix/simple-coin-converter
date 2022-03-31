@@ -4,6 +4,7 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    CButton: typeof import('./../components/CButton.vue')['default']
     CConverter: typeof import('./../components/CConverter.vue')['default']
     CConverterInput: typeof import('./../components/CConverterInput.vue')['default']
     CFooter: typeof import('./../components/CFooter.vue')['default']

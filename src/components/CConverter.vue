@@ -1,5 +1,5 @@
 <template>
-  <div class="converter">
+  <div class="flex flex-col items-center p-8 border border-bg-darker rounded shadow-lg">
     <!-- "Inputs" -->
     <CConverterInput
       :amount="fromAmount"
@@ -12,9 +12,9 @@
       "
     />
 
-    <button type="button" title="Swap 2 tokens" class="button button--circular converter__swap-button" @click="swap()">
+    <CButton variant="outlined" type="button" title="Swap 2 tokens" class="my-2" @click="swap()">
       <i-mdi-arrow-down />
-    </button>
+    </CButton>
 
     <CConverterInput
       :amount="toAmount"
@@ -29,25 +29,26 @@
     <!-- END "Inputs" -->
 
     <!-- "Price" -->
-    <div class="converter__price-wrapper">
-      <span class="converter__price-left">Price</span>
+    <div class="flex items-center self-stretch mt-4">
+      <span class="font-bold text-primary-default">Price</span>
 
-      <div class="converter__price-right">
+      <div class="flex-1 min-w-0 flex items-center justify-end ml-4">
         <p>
           <span>{{ `${removeScientific(price.toString())}` }}</span
-          >&nbsp;<span class="converter__price-token">{{ fromToken?.symbol }}</span
-          >&nbsp;<span>per</span>&nbsp;<span class="converter__price-token">{{ toToken?.symbol }}</span>
+          >&nbsp;<span class="italic font-bold">{{ fromToken?.symbol }}</span
+          >&nbsp;<span>per</span>&nbsp;<span class="italic font-bold">{{ toToken?.symbol }}</span>
         </p>
 
-        <button
+        <CButton
+          variant="full"
           type="button"
           title="Refresh tokens"
-          class="button button--circular converter__refresh-price-button"
-          :class="{ loading: getTokensLoading }"
+          class="ml-2"
+          :class="{ 'animate-spin': getTokensLoading }"
           @click="refresh()"
         >
-          <i-mdi-autorenew />
-        </button>
+          <i-mdi-autorenew class="w-4 h-4" />
+        </CButton>
       </div>
     </div>
     <!-- END "Price" -->
@@ -176,68 +177,3 @@
     updateAmountsWithBase(fromAmount.value);
   }
 </script>
-
-<style lang="scss">
-  .converter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    border: 1px solid $color--bg--darker;
-    border-radius: 0.25rem;
-    box-shadow: 0px 4px 6px 1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-
-    &__swap-button {
-      margin: 0.5rem 0;
-
-      svg {
-        width: 1.5em;
-        height: 1.5em;
-      }
-    }
-
-    &__price-wrapper {
-      display: flex;
-      align-items: center;
-      align-self: stretch;
-      margin-top: 1rem;
-
-      .converter {
-        &__price-left {
-          font-weight: 700;
-          color: $color--primary;
-        }
-
-        &__price-right {
-          flex: 1 1 0%;
-          min-width: 0;
-          display: flex;
-          align-items: center;
-          justify-content: end;
-          margin-left: 1rem;
-
-          .converter {
-            &__price-token {
-              font-style: italic;
-              font-weight: 700;
-            }
-
-            &__refresh-price-button {
-              margin-left: 0.5rem;
-              background-color: $color--primary;
-              color: $color--bg;
-
-              &:hover {
-                background-color: $color--primary--lighter;
-              }
-
-              &.loading {
-                animation: spin 1s linear infinite;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-</style>
